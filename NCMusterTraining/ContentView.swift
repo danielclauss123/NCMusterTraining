@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var exerciseIndexes = Exercise.randomIndexArray()
+    @State private var viewModel = ViewModel()
     
     @State private var showingExplanation = false
     
     var exercise: Exercise {
         // Careful, exerciseIndexes should never be empty, otherwise CRASH.
-        Exercise.exercises[exerciseIndexes.first!]
+        Exercise.exercises[viewModel.exerciseIndexes.first!]
     }
     
     @State private var highlightingCorrect = false
@@ -61,10 +61,10 @@ struct ContentView: View {
                         highlightingCorrect = false
                     }
                     
-                    if exerciseIndexes.count > 1 {
-                        exerciseIndexes.removeFirst()
+                    if viewModel.exerciseIndexes.count > 1 {
+                        viewModel.exerciseIndexes.removeFirst()
                     } else {
-                        exerciseIndexes = Exercise.randomIndexArray()
+                        viewModel.exerciseIndexes = Exercise.randomIndexArray()
                     }
                 }
             } else {
